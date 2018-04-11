@@ -2,16 +2,21 @@ function Label(props) {
   return <h1>{props.title}</h1>;
 }
 
+function Button(props) {
+  return <button onClick={props.onClick}>{props.text}</button>;
+}
+
 function FriendsList(props) {
   return (
     <ul>
       {props.list.map(name => (
         <li key={name}>
           <span>{name}</span>
-          <button onClick={() => props.onRemoveFriend(name)}>Remove</button>
-          <button onClick={() => props.onDeactivateFriend(name)}>
-            Deactivate
-          </button>
+          <Button onClick={() => props.onRemoveFriend(name)} text="Remove" />
+          <Button
+            onClick={() => props.onDeactivateFriend(name)}
+            text="Deactivate"
+          />
         </li>
       ))}
     </ul>
@@ -24,7 +29,10 @@ function InactiveFriendsList(props) {
       {props.list.map(name => (
         <li key={name}>
           <span>{name}</span>
-          <button onClick={() => props.onActivateFriend(name)}>Activate</button>
+          <Button
+            onClick={() => props.onActivateFriend(name)}
+            text="Activate"
+          />
         </li>
       ))}
     </ul>
@@ -111,8 +119,8 @@ class App extends React.Component {
           value={this.state.input}
           onChange={this.updateInput}
         />
-        <button onClick={this.handleAddFriend}>Add</button>
-        <button onClick={this.handleClearFriend}>Clear all</button>
+        <Button onClick={this.handleAddFriend} text="Add" />
+        <Button onClick={this.handleClearFriend} text="Clear all" />
         <Label title="Activate friends" />
         <FriendsList
           list={this.state.friends}
