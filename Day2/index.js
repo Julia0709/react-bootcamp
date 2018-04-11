@@ -1,10 +1,6 @@
-function Label(props) {
-  return <h1>{props.title}</h1>;
-}
+const Label = props => <h1>{props.title}</h1>;
 
-function Button(props) {
-  return <button onClick={props.onClick}>{props.text}</button>;
-}
+const Button = props => <button onClick={props.onClick}>{props.text}</button>;
 
 function FriendsList(props) {
   return (
@@ -58,55 +54,43 @@ class App extends React.Component {
   }
 
   handleClearFriend(name) {
-    this.setState(currentState => {
-      return {
-        friends: [],
-      };
-    });
+    this.setState(currentState => ({
+      friends: [],
+    }));
   }
 
   handleAddFriend(name) {
-    this.setState(currentState => {
-      return {
-        friends: currentState.friends.concat([this.state.input]),
-        input: '',
-      };
-    });
+    this.setState(currentState => ({
+      friends: currentState.friends.concat([this.state.input]),
+      input: '',
+    }));
   }
 
   handleRemoveFriend(name) {
-    this.setState(currentState => {
-      return {
-        friends: currentState.friends.filter(friend => friend !== name),
-      };
-    });
+    this.setState(currentState => ({
+      friends: currentState.friends.filter(friend => friend !== name),
+    }));
   }
 
   handleDeactivateFriend(name) {
-    this.setState(currentState => {
-      return {
-        friends: currentState.friends.filter(friend => friend !== name),
-        inactiveFriends: currentState.inactiveFriends.concat(name),
-      };
-    });
+    this.setState(currentState => ({
+      friends: currentState.friends.filter(friend => friend !== name),
+      inactiveFriends: currentState.inactiveFriends.concat(name),
+    }));
   }
 
   handleActivateFriend(name) {
-    this.setState(currentState => {
-      return {
-        inactiveFriends: currentState.inactiveFriends.filter(
-          friend => friend !== name,
-        ),
-        friends: currentState.friends.concat(name),
-      };
-    });
+    this.setState(currentState => ({
+      inactiveFriends: currentState.inactiveFriends.filter(
+        friend => friend !== name,
+      ),
+      friends: currentState.friends.concat(name),
+    }));
   }
 
   updateInput(e) {
-    const value = e.target.value;
-
     this.setState({
-      input: value,
+      input: e.target.value,
     });
   }
 
